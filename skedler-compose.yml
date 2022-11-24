@@ -1,0 +1,15 @@
+version: '2.4'
+
+services:
+  reports:
+    image: skedler/reports:latest
+    container_name: reports
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - reportdata:/var/lib/skedler
+      - ./reporting.yml:/opt/skedler/config/reporting.yml
+    ports:
+      - '3001:3001'
